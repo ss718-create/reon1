@@ -468,29 +468,29 @@ legend { padding: 0; margin-bottom: 8px; font-size: .85rem; font-weight: 700; co
 <section class="band" id="intro" aria-labelledby="intro-title">
   <div class="wrap">
     <div class="sec-head">
-      <h2 id="intro-title">기업이 원하는 맞춤형 실무 역량을 갖춘<br>핵심 인재 양성의 요람</h2>
-      <p>리온(RE:ON)은 국립창원대학교 가상기업 프로젝트로 출발했습니다. 학생들이 일상을 다시(RE) 바라보고 바로 켜는(ON) 두 가지 움직임으로 새로운 가치를 만듭니다.</p>
+      <h2 id="intro-title">맞춤형 실무 역량을 갖춘<br>핵심 인재 양성의 요람</h2>
+      <p>리온(RE:ON)은 국립창원대학교 가상기업 프로젝트로 학생들이 일상을 다시(RE) 바라보고 실행하는(ON) 두 가지 움직임으로 새로운 가치를 만듭니다.</p>
     </div>
     <div class="intro-grid">
       <!-- 비전: 두 개의 축 (텍스트만 수정하세요) -->
       <div class="axes">
         <div class="axis axis-a">
           <div class="axis-word">RENEWAL</div>
-          <div class="axis-kr">새로고침 · 혁신</div>
-          <p>익숙한 방식을 다시 바라보고, 일상에 필요한 새로운 가치를 기획합니다.</p>
+          <div class="axis-kr">관점의 전환 · 혁신</div>
+          <p>시장과 일상의 문제를 새롭게 정의하고, 실질적인 대안을 설계하는 실무형 기획 프로세스입니다.</p>
           <ul>
-            <li><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>고객 의견을 반영한 개선</li>
+            <li><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>구성원 의견을 반영한 개선</li>
             <li><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>기존 방식을 다시 설계하는 기획</li>
           </ul>
         </div>
         <div class="axes-dots" aria-hidden="true"><i></i><i></i></div>
         <div class="axis axis-b">
           <div class="axis-word">ACTIVATION</div>
-          <div class="axis-kr">활성화 · 실행</div>
-          <p>기획에서 멈추지 않고 현장에서 실행해 사람들의 참여를 이끌어 냅니다.</p>
+          <div class="axis-kr">아이디어의 현실 · 실행</div>
+          <p>기획을 실제 현장으로 옮겨, 고객의 반응을 직접 확인하고 성과를 만들어냅니다.</p>
           <ul>
-            <li><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>부스·이벤트 현장 운영</li>
-            <li><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>SNS를 통한 소통과 확산</li>
+            <li><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>타겟 고객의 참여를 유도하는 오프라인 프로모션</li>
+            <li><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>온·오프라인 경계를 잇는 디지털 커뮤니케이션</li>
           </ul>
         </div>
       </div>
@@ -1209,5 +1209,87 @@ legend { padding: 0; margin-bottom: 8px; font-size: .85rem; font-weight: 700; co
   renderCart();
 })();
 </script>
+
+<!-- 여기서부터 복사해서 </body> 바로 위에 붙여넣으세요 -->
+<style>
+  .popup-overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+  }
+  .popup-box {
+    background: #fff;
+    width: 90%;
+    max-width: 400px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  }
+  .popup-content {
+    padding: 20px;
+    text-align: center;
+    color: #333;
+  }
+  .popup-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+    background: #f4f4f4;
+    font-size: 14px;
+    color: #333;
+  }
+  #close-popup {
+    background: #333;
+    color: #fff;
+    border: none;
+    padding: 5px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+</style>
+
+<div id="popup-overlay" class="popup-overlay">
+  <div class="popup-box">
+    <div class="popup-content">
+      <h2>공지사항</h2>
+      <p>리온의 최종 성과공유회에 초대합니다.</p>
+    </div>
+    <div class="popup-footer">
+      <label>
+        <input type="checkbox" id="hide-today"> 오늘 하루 보지 않기
+      </label>
+      <button id="close-popup">닫기</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const popup = document.getElementById("popup-overlay");
+    const closeBtn = document.getElementById("close-popup");
+    const hideTodayCheckbox = document.getElementById("hide-today");
+
+    const today = new Date().toISOString().slice(0, 10);
+    const savedDate = localStorage.getItem("hidePopupDate");
+
+    if (savedDate !== today) {
+      popup.style.display = "flex";
+    }
+
+    closeBtn.addEventListener("click", function () {
+      if (hideTodayCheckbox.checked) {
+        localStorage.setItem("hidePopupDate", today);
+      }
+      popup.style.display = "none";
+    });
+  });
+</script>
+<!-- 여기까지 복사 -->
 
 </body></html>
