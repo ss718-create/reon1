@@ -5,26 +5,18 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>리온 RE:ON</title>
 <meta name="description" content="리온 RE:ON 공식 가상기업 웹사이트">
-<meta name="claude:viewport-fit-sides" content="cover">
-<style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Sora:wght@500;600;700&display=swap">
 <style>
-/* ==========================================================
-   RE:ON 공식 홈페이지
-   Layout: 흰색 / 쿨 그레이 밴드를 교차 배치한 단일 페이지.
-           히어로 → 기업소개(흰) → 핵심가치(쿨) → 인재상(흰) → News(쿨) → 제품구매(흰) → 문의하기(쿨) → 푸터
-   디자인 토큰은 아래 :root 에서만 수정하세요.
-   ========================================================== */
 :root {
-  --deep: #2F4699;          /* 메인 컬러 Deep Blue */
-  --blue: #1F66B9;          /* 서브 컬러 Blue */
-  --coral: #F15A24;         /* 강조 컬러 Coral Orange (CTA·배지 전용) */
+  --deep: #2F4699;
+  --blue: #1F66B9;
+  --coral: #F15A24;
   --coral-dark: #D94817;
   --white: #FFFFFF;
-  --cool: #F8FAFC;          /* 쿨 라이트그레이 */
-  --ink: #18213F;           /* 본문 글자색 */
+  --cool: #F8FAFC;
+  --ink: #18213F;
   --muted: #56627F;
   --line: #E2E8F3;
   --field: #C9D3E6;
@@ -42,8 +34,12 @@
 }
 
 *, *::before, *::after { box-sizing: border-box; }
-[hidden] { display: none !important; }
-html { scroll-padding-top: calc(var(--header-h) + env(safe-area-inset-top, 0px) + 8px); }
+[hidden]:not([hidden=until-found i]) { display: none !important; }
+html {
+  scroll-padding-top: calc(var(--header-h) + env(safe-area-inset-top, 0px) + 8px);
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
 @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
 html.lock { overflow: hidden; }
 
@@ -441,13 +437,77 @@ legend { padding: 0; margin-bottom: 8px; font-size: .85rem; font-weight: 700; co
 .foot-notice { font-size: .92rem; color: rgba(255,255,255,.82); }
 .foot-copy { font-size: .82rem; color: rgba(255,255,255,.65); }
 
-/* ---------- 모달 공통 (가상 주문 영수증 & News 상세 팝업) ---------- */
+/* ---------- 모달 공통 ---------- */
 .modal {
   position: fixed; inset: 0; z-index: 120; display: grid; place-items: center;
   padding: max(16px, env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 0px)) max(16px, env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px));
   background: rgba(24,33,63,.62); opacity: 0; visibility: hidden; transition: opacity .25s, visibility 0s .25s;
 }
 .modal.open { opacity: 1; visibility: visible; transition: opacity .25s; }
+
+/* ---------- 모바일 초청장 팝업 ---------- */
+.invite-dialog {
+  width: min(390px, 100%);
+  background: #fff;
+  border-radius: var(--r-l);
+  box-shadow: var(--shadow-l);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.invite-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  position: relative;
+}
+.invite-link:focus-visible { outline: 3px solid var(--coral); outline-offset: -3px; }
+.invite-img { display: block; width: 100%; max-height: 72vh; object-fit: cover; }
+.invite-placeholder {
+  position: relative;
+  padding: 36px 26px 32px;
+  text-align: center;
+  color: #fff;
+  background: linear-gradient(155deg, #2F4699 0%, #264FA3 55%, #1F66B9 100%);
+  overflow: hidden;
+}
+.invite-placeholder::before {
+  content: ""; position: absolute; right: -40px; top: -40px; width: 160px; height: 160px;
+  border-radius: 50%; background: rgba(255, 255, 255, .08);
+}
+.invite-badge {
+  display: inline-block; padding: 6px 14px; border-radius: 999px;
+  background: var(--coral); color: #fff; font: 700 .75rem/1 var(--font-display); letter-spacing: .08em;
+}
+.invite-placeholder h3 { margin-top: 16px; font-size: 1.4rem; line-height: 1.35; }
+.invite-placeholder p { margin-top: 10px; font-size: .92rem; color: rgba(255, 255, 255, .88); line-height: 1.55; }
+.invite-mascot {
+  margin: 18px auto 14px; height: 148px; width: auto; display: block;
+  filter: drop-shadow(0 8px 16px rgba(15, 28, 74, .28));
+}
+.invite-date {
+  display: inline-block; padding: 7px 14px; border-radius: 10px;
+  background: rgba(255, 255, 255, .14); font-size: .85rem; font-weight: 600;
+}
+.invite-cta-pill {
+  margin-top: 18px; display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  width: 100%; min-height: 46px; border-radius: 999px; background: #fff; color: var(--deep);
+  font-weight: 700; font-size: .95rem; transition: background-color .18s, color .18s;
+}
+.invite-link:hover .invite-cta-pill { background: var(--coral); color: #fff; }
+.invite-bar {
+  display: grid; grid-template-columns: 1fr 1fr; background: var(--white); border-top: 1px solid var(--line);
+}
+.invite-bar button {
+  min-height: 48px; border: 0; background: transparent; cursor: pointer;
+  font-size: .88rem; font-weight: 600; color: var(--muted); transition: background-color .15s, color .15s;
+}
+.invite-bar button:first-child { border-right: 1px solid var(--line); }
+.invite-bar button:hover { background: var(--tint); color: var(--deep); }
+.invite-bar button:last-child { color: var(--ink); font-weight: 700; }
+
+/* ---------- 가상 주문 영수증 모달 ---------- */
 .receipt { width: min(470px, 100%); max-height: 90vh; max-height: calc(100dvh - 32px); overflow: auto; background: #fff; border-radius: var(--r-l); box-shadow: var(--shadow-l); }
 .rc-head { padding: 30px 24px 38px; text-align: center; color: #fff; background: linear-gradient(135deg, var(--deep), var(--blue)); }
 .rc-check { display: inline-grid; place-items: center; width: 52px; height: 52px; margin-bottom: 12px; border-radius: 50%; background: rgba(255,255,255,.18); }
@@ -477,7 +537,7 @@ legend { padding: 0; margin-bottom: 8px; font-size: .85rem; font-weight: 700; co
 .bubble strong { display: block; color: var(--deep); }
 .bubble span { color: var(--muted); }
 
-/* News 상세 모달 카드 */
+/* ---------- News 상세 모달 카드 ---------- */
 .news-dialog {
   width: min(560px, 100%); max-height: 90vh; max-height: calc(100dvh - 32px); overflow: auto;
   background: #fff; border-radius: var(--r-l); box-shadow: var(--shadow-l); padding: clamp(22px, 4vw, 32px);
@@ -698,7 +758,7 @@ legend { padding: 0; margin-bottom: 8px; font-size: .85rem; font-weight: 700; co
   </div>
 </section>
 
-<!-- ======================== 인재상 (신규 추가) ======================== -->
+<!-- ======================== 인재상 ======================== -->
 <section class="band" id="talent" aria-labelledby="talent-title">
   <div class="wrap">
     <div class="sec-head">
@@ -758,7 +818,7 @@ legend { padding: 0; margin-bottom: 8px; font-size: .85rem; font-weight: 700; co
   </div>
 </section>
 
-<!-- ======================== 소식 News (신규 추가) ======================== -->
+<!-- ======================== 소식 News ======================== -->
 <section class="band band-cool" id="news" aria-labelledby="news-title">
   <div class="wrap">
     <div class="news-head">
@@ -877,7 +937,6 @@ legend { padding: 0; margin-bottom: 8px; font-size: .85rem; font-weight: 700; co
           <li><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>SNS 콘텐츠 제휴</li>
         </ul>
 
-        <!-- 공식 인스타그램 연결 배너 -->
         <a class="insta-card" data-insta-link href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">
           <div class="insta-card-left">
             <span class="insta-card-ico">
@@ -951,6 +1010,20 @@ legend { padding: 0; margin-bottom: 8px; font-size: .85rem; font-weight: 700; co
     </div>
   </div>
 </footer>
+
+<!-- ======================== 모바일 초청장 팝업 모달 ======================== -->
+<div class="modal" id="invite-modal" role="dialog" aria-modal="true" aria-labelledby="inv-title" aria-hidden="true">
+  <div class="invite-dialog">
+    <h2 class="sr-only" id="inv-title">리온 모바일 초청장</h2>
+    <a class="invite-link" id="invite-link" href="#invite" aria-label="모바일 초청장 바로가기">
+      <div id="invite-visual"></div>
+    </a>
+    <div class="invite-bar">
+      <button type="button" id="inv-today">오늘 하루 보지 않기</button>
+      <button type="button" id="inv-close">닫기</button>
+    </div>
+  </div>
+</div>
 
 <!-- ======================== News 상세 팝업 모달 ======================== -->
 <div class="modal" id="news-modal" role="dialog" aria-modal="true" aria-labelledby="nd-title" aria-hidden="true">
@@ -1037,9 +1110,7 @@ legend { padding: 0; margin-bottom: 8px; font-size: .85rem; font-weight: 700; co
   'use strict';
 
   /* ==========================================================
-     ✎ 팀원 수정 구역 ①  인스타그램 / 배송비 / News 소식 5개 / 상품 목록
-     - instagramUrl에 실제 리온 인스타그램 주소를 넣으면 페이지 전체에 자동 반영됩니다.
-     - NEWS_LIST에서 url을 비워두면('') 상세 팝업이 뜨고, 링크를 넣으면('https://...') 새 탭이 열립니다.
+     ✎ 팀원 수정 구역  (인스타그램 / 초청장 / News 5개 / 상품 목록)
      ========================================================== */
   const CONFIG = {
     shippingFee: 3000,
@@ -1047,6 +1118,18 @@ legend { padding: 0; margin-bottom: 8px; font-size: .85rem; font-weight: 700; co
     maxQty: 99,
     instagramUrl: 'https://www.instagram.com/cwnu_reon/',
     instagramHandle: '@cwnu_reon'
+  };
+
+  // 모바일 초청장 설정 (이미지·링크가 생기면 아래 두 줄만 채우세요)
+  const INVITE = {
+    enabled: true,
+    badge: 'MOBILE INVITATION',
+    title: '리온(RE:ON) 공식 행사에 초대합니다',
+    subtitle: '국립창원대학교 가상기업 프로젝트 리온의\n특별한 자리에 함께해 주세요.',
+    dateText: '일시 및 장소 · 추후 공지 예정',
+    ctaText: '모바일 초청장 열기',
+    imageUrl: '', // ◀ 예: 'assets/invite.png'
+    linkUrl: ''   // ◀ 예: 'https://초청장주소'
   };
 
   const NEWS_LIST = [
@@ -1080,10 +1163,10 @@ legend { padding: 0; margin-bottom: 8px; font-size: .85rem; font-weight: 700; co
     {
       id: 4,
       category: '현장운영',
-      date: '2026.10.28',
-      title: '교내 축제 부스 참여 및 고객 참여형 설문 프로모션 성료',
+      date: '2026.10.05',
+      title: '리온, 교내 축제 부스 참여 및 고객 참여형 설문 프로모션 성료',
       summary: '현장에서 학우들과 직접 소통하며 제품 피드백과 브랜드 인지도를 확보했습니다.',
-      content: '영업지원팀과 마케팅 담당자들이 교내 축제 부스를 운영하며 재학생 고객들과 직접 만났습니다.\n\n현장에서 수집한 고객 의견과 설문 데이터는 차기 굿즈 디자인 및 프로모션 기획에 적극 반영될 예정입니다.',
+      content: '리온을 홍보하기 위해 영업지원팀이 중심이 되어 리온의 구성원들이 교내 축제 부스를 운영하며 재학생과 소통했습니다.\n\n현장에서 수집한 고객 의견과 설문 데이터는 차기 굿즈 디자인 및 프로모션 기획에 적극 반영될 예정입니다.',
       url: ''
     },
     {
@@ -1091,9 +1174,9 @@ legend { padding: 0; margin-bottom: 8px; font-size: .85rem; font-weight: 700; co
       category: 'SNS·이벤트',
       date: '2026.10.20',
       title: '리온 공식 인스타그램 채널 오픈 및 주간 콘텐츠 연재 안내',
-      summary: '매주 업로드되는 카드뉴스, 부서별 활동 비하인드, 팔로우 이벤트를 인스타그램에서 만나보세요.',
-      content: '리온 공식 인스타그램에서 매주 새로운 카드뉴스와 현장 소식을 전해 드립니다.',
-      url: 'https://www.instagram.com/'
+      summary: '매주 업로드되는 리온의 소식을 인스타그램에서 만나보세요!',
+      content: '리온 공식 인스타그램에서 매주 새로운 소식과 재미있는 컨텐츠를 전해 드립니다!\n\n팔로우하고 좋아요를 눌러 주시면 리온의 다양한 활동과 이벤트 소식을 가장 빠르게 확인하실 수 있습니다.',
+      url: 'https://www.instagram.com/cwnu_reon/'
     }
   ];
 
@@ -1111,7 +1194,7 @@ legend { padding: 0; margin-bottom: 8px; font-size: .85rem; font-weight: 700; co
     },
     {
       id: 'glow', art: 'glow', badge: 'NEW', tile: 'linear-gradient(160deg,#1B2B66,#2F4699)', img: '',
-      name: 'RE:ON 브라이트닝 스틱',
+      name: 'RE:ON 야광봉',
       desc: '어둠 속에서도 선명하게. 응원과 이벤트의 분위기를 밝혀 줍니다.',
       optionLabel: '구성',
       options: [
@@ -1142,7 +1225,7 @@ legend { padding: 0; margin-bottom: 8px; font-size: .85rem; font-weight: 700; co
       ]
     }
   ];
-  /* ============ ✎ 수정 구역 끝 (아래는 동작 코드입니다) ============ */
+  /* ============ ✎ 수정 구역 끝 ============ */
 
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
@@ -1150,15 +1233,95 @@ legend { padding: 0; margin-bottom: 8px; font-size: .85rem; font-weight: 700; co
   const clamp = (n, a, b) => Math.min(b, Math.max(a, n));
   const byId = id => PRODUCTS.find(p => p.id === id);
 
-  /* ---------- 인스타그램 링크 일괄 반영 ---------- */
   $$('[data-insta-link]').forEach(a => { a.href = CONFIG.instagramUrl; });
   $$('[data-insta-handle]').forEach(el => { el.textContent = CONFIG.instagramHandle; });
 
-  /* ---------- News 리스트 렌더 & 팝업/새탭 동작 ---------- */
-  const newsListEl = $('#news-list');
-  const newsModal = $('#news-modal');
-  let lastFocus = null;
+  const toastEl = $('#toast'); let toastT;
+  function toast(msg) {
+    toastEl.textContent = msg; toastEl.classList.add('show');
+    clearTimeout(toastT); toastT = setTimeout(() => toastEl.classList.remove('show'), 2600);
+  }
 
+  let lastFocus = null;
+  const drawer = $('#drawer'), scrim = $('#scrim'), modal = $('#receipt-modal'), newsModal = $('#news-modal'), inviteModal = $('#invite-modal');
+  drawer.inert = true; modal.inert = true; newsModal.inert = true; inviteModal.inert = true;
+  const lock = on => document.documentElement.classList.toggle('lock', on);
+  const anyOverlayOpen = () =>
+    modal.classList.contains('open') ||
+    newsModal.classList.contains('open') ||
+    inviteModal.classList.contains('open') ||
+    drawer.classList.contains('open');
+
+  /* ---------- 모바일 초청장 팝업 ---------- */
+  const inviteLink = $('#invite-link');
+  const inviteVisual = $('#invite-visual');
+  const INVITE_STORAGE_KEY = 'reon_invite_hide_date';
+
+  function getTodayStr() {
+    const d = new Date();
+    return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+  }
+
+  function renderInviteContent() {
+    if (INVITE.imageUrl && INVITE.imageUrl.trim()) {
+      inviteVisual.innerHTML = `<img class="invite-img" src="${INVITE.imageUrl}" alt="${INVITE.title}">`;
+    } else {
+      inviteVisual.innerHTML = `
+        <div class="invite-placeholder">
+          <span class="invite-badge">${INVITE.badge}</span>
+          <h3>${INVITE.title}</h3>
+          <p>${INVITE.subtitle.replace(/\n/g, '<br>')}</p>
+          <img class="invite-mascot" src="assets/mascot.png" alt="리온 마스코트 하우리" width="440" height="620">
+          <div class="invite-date">${INVITE.dateText}</div>
+          <div class="invite-cta-pill">
+            <span>${INVITE.ctaText}</span>
+            <svg class="i" style="width:17px;height:17px" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg>
+          </div>
+        </div>`;
+    }
+    if (INVITE.linkUrl && INVITE.linkUrl.trim()) {
+      inviteLink.href = INVITE.linkUrl;
+      inviteLink.target = '_blank';
+      inviteLink.rel = 'noopener noreferrer';
+    }
+  }
+
+  function openInviteModal() {
+    if (!INVITE.enabled) return;
+    try {
+      if (localStorage.getItem(INVITE_STORAGE_KEY) === getTodayStr()) return;
+    } catch (e) {}
+    renderInviteContent();
+    lastFocus = document.activeElement;
+    inviteModal.inert = false;
+    inviteModal.setAttribute('aria-hidden', 'false');
+    inviteModal.classList.add('open');
+    lock(true);
+  }
+
+  function closeInviteModal(hideToday = false) {
+    if (hideToday) {
+      try { localStorage.setItem(INVITE_STORAGE_KEY, getTodayStr()); } catch (e) {}
+    }
+    inviteModal.classList.remove('open');
+    inviteModal.setAttribute('aria-hidden', 'true');
+    inviteModal.inert = true;
+    if (!anyOverlayOpen()) lock(false);
+    if (lastFocus && document.contains(lastFocus)) lastFocus.focus({ preventScroll: true });
+  }
+
+  inviteLink.addEventListener('click', e => {
+    if (!INVITE.linkUrl || !INVITE.linkUrl.trim()) {
+      e.preventDefault();
+      toast('모바일 초청장 링크가 준비 중입니다. 곧 공개됩니다!');
+    }
+  });
+  $('#inv-close').addEventListener('click', () => closeInviteModal(false));
+  $('#inv-today').addEventListener('click', () => closeInviteModal(true));
+  inviteModal.addEventListener('click', e => { if (e.target === inviteModal) closeInviteModal(false); });
+
+  /* ---------- News 리스트 & 팝업 ---------- */
+  const newsListEl = $('#news-list');
   newsListEl.innerHTML = NEWS_LIST.map((item, idx) => {
     const isExternal = Boolean(item.url && item.url.trim());
     return `<button type="button" class="news-item" data-news-idx="${idx}" role="listitem">
@@ -1194,7 +1357,7 @@ legend { padding: 0; margin-bottom: 8px; font-size: .85rem; font-weight: 700; co
     newsModal.inert = false;
     newsModal.setAttribute('aria-hidden', 'false');
     newsModal.classList.add('open');
-    document.documentElement.classList.add('lock');
+    lock(true);
     $('#nd-title').focus({ preventScroll: true });
   }
 
@@ -1202,23 +1365,20 @@ legend { padding: 0; margin-bottom: 8px; font-size: .85rem; font-weight: 700; co
     newsModal.classList.remove('open');
     newsModal.setAttribute('aria-hidden', 'true');
     newsModal.inert = true;
-    if (!$('#receipt-modal').classList.contains('open') && !$('#drawer').classList.contains('open')) {
-      document.documentElement.classList.remove('lock');
-    }
+    if (!anyOverlayOpen()) lock(false);
     if (lastFocus && document.contains(lastFocus)) lastFocus.focus({ preventScroll: true });
   }
 
   newsListEl.addEventListener('click', e => {
     const btn = e.target.closest('[data-news-idx]');
-    if (!btn) return;
-    openNewsItem(NEWS_LIST[Number(btn.dataset.newsIdx)]);
+    if (btn) openNewsItem(NEWS_LIST[Number(btn.dataset.newsIdx)]);
   });
   $('#news-top-arrow').addEventListener('click', () => openNewsItem(NEWS_LIST[0]));
   $('#nd-close').addEventListener('click', closeNewsModal);
   $('#nd-close-x').addEventListener('click', closeNewsModal);
   newsModal.addEventListener('click', e => { if (e.target === newsModal) closeNewsModal(); });
 
-  /* ---------- 상품 그림 (이미지 자리용 SVG) ---------- */
+  /* ---------- 상품 그림 & 목록 렌더 ---------- */
   const ART = {
     clicker: (pid, o) => {
       const c = (o && o.color) || '#2F4699';
@@ -1266,14 +1426,6 @@ legend { padding: 0; margin-bottom: 8px; font-size: .85rem; font-weight: 700; co
     ? `<img src="${p.img}" alt="${p.name}">`
     : ART[p.art](p.id, p.options[oi]);
 
-  /* ---------- 토스트 ---------- */
-  const toastEl = $('#toast'); let toastT;
-  function toast(msg) {
-    toastEl.textContent = msg; toastEl.classList.add('show');
-    clearTimeout(toastT); toastT = setTimeout(() => toastEl.classList.remove('show'), 2600);
-  }
-
-  /* ---------- 상품 목록 렌더 ---------- */
   const grid = $('#product-grid');
   grid.innerHTML = PRODUCTS.map(p => {
     const opts = p.options.map((o, i) =>
@@ -1329,7 +1481,7 @@ legend { padding: 0; margin-bottom: 8px; font-size: .85rem; font-weight: 700; co
     if (e.target.matches('[data-qty]')) updateCard(e.target.closest('.product'));
   });
 
-  /* ---------- 장바구니 상태 ---------- */
+  /* ---------- 장바구니 & 주문서 ---------- */
   const cart = [];
   const unit = it => byId(it.pid).options[it.oi].price;
   function totals() {
@@ -1416,11 +1568,6 @@ legend { padding: 0; margin-bottom: 8px; font-size: .85rem; font-weight: 700; co
     renderCart();
   });
 
-  /* ---------- 드로어 / 영수증 모달 열기·닫기 ---------- */
-  const drawer = $('#drawer'), scrim = $('#scrim'), modal = $('#receipt-modal');
-  drawer.inert = true; modal.inert = true; newsModal.inert = true;
-  const lock = on => document.documentElement.classList.toggle('lock', on);
-
   function openDrawer() {
     lastFocus = document.activeElement;
     drawer.inert = false; drawer.setAttribute('aria-hidden', 'false');
@@ -1430,7 +1577,7 @@ legend { padding: 0; margin-bottom: 8px; font-size: .85rem; font-weight: 700; co
   function closeDrawer(restore = true) {
     drawer.classList.remove('open'); scrim.classList.remove('open');
     drawer.setAttribute('aria-hidden', 'true'); drawer.inert = true;
-    if (!modal.classList.contains('open') && !newsModal.classList.contains('open')) lock(false);
+    if (!anyOverlayOpen()) lock(false);
     if (restore && lastFocus && document.contains(lastFocus)) lastFocus.focus({ preventScroll: true });
   }
   $('#open-cart').addEventListener('click', openDrawer);
@@ -1438,7 +1585,6 @@ legend { padding: 0; margin-bottom: 8px; font-size: .85rem; font-weight: 700; co
   scrim.addEventListener('click', () => closeDrawer());
   $('#empty-go').addEventListener('click', () => { closeDrawer(false); location.hash = '#shop'; });
 
-  /* ---------- 주문서 ---------- */
   function showCheckout() {
     if (!cart.length) return;
     checkoutEl.hidden = false;
@@ -1524,7 +1670,8 @@ legend { padding: 0; margin-bottom: 8px; font-size: .85rem; font-weight: 700; co
   });
 
   function closeReceipt() {
-    modal.classList.remove('open'); modal.setAttribute('aria-hidden', 'true'); modal.inert = true; lock(false);
+    modal.classList.remove('open'); modal.setAttribute('aria-hidden', 'true'); modal.inert = true;
+    if (!anyOverlayOpen()) lock(false);
     cart.length = 0;
     $('#order-form').reset(); $('#o-memo').hidden = true; payNote();
     ['o-name', 'o-phone', 'o-addr'].forEach(id => setErr(id, 'e-' + id.slice(2), ''));
@@ -1571,11 +1718,14 @@ legend { padding: 0; margin-bottom: 8px; font-size: .85rem; font-weight: 700; co
 
   /* ---------- 키보드: Esc 닫기, 포커스 가두기 ---------- */
   document.addEventListener('keydown', e => {
-    const open = newsModal.classList.contains('open')
-      ? newsModal
-      : (modal.classList.contains('open') ? modal : (drawer.classList.contains('open') ? drawer : null));
+    const open = inviteModal.classList.contains('open')
+      ? inviteModal
+      : (newsModal.classList.contains('open')
+        ? newsModal
+        : (modal.classList.contains('open') ? modal : (drawer.classList.contains('open') ? drawer : null)));
     if (e.key === 'Escape') {
-      if (newsModal.classList.contains('open')) closeNewsModal();
+      if (inviteModal.classList.contains('open')) closeInviteModal(false);
+      else if (newsModal.classList.contains('open')) closeNewsModal();
       else if (modal.classList.contains('open')) closeReceipt();
       else if (drawer.classList.contains('open')) closeDrawer();
       else if (nav.classList.contains('open')) setMenu(false);
@@ -1592,6 +1742,7 @@ legend { padding: 0; margin-bottom: 8px; font-size: .85rem; font-weight: 700; co
   });
 
   renderCart();
+  openInviteModal();
 })();
 </script>
 </body>
